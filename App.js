@@ -1,10 +1,13 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import {Text, View, SafeAreaView} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+
+import Router from './src/router';
 
 export default function App() {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   );
 }
