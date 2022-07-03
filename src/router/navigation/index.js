@@ -1,3 +1,3 @@
-import TabMain from "./main";
+import TabMain from './main';
 
 export default TabMain;

@@ -1,2 +1,2 @@
-export { default as Header } from './Header';
-export { default as EmptyMessages } from './EmptyMessages';
+export {default as Header} from './Header';
+export {default as EmptyMessages} from './EmptyMessages';
