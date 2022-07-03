@@ -15,7 +15,15 @@ export default function ChatActive({item, navigation}) {
     } 
 
     const renderStatusMessage = (item) => {
-        if (item.readed) {
+        if(item.delivered && !item.readed) {
+            return (
+                <Icon 
+                    name="done-all" 
+                    type='material' 
+                    size={20} 
+                    color={colors.muted} />
+            )
+        } else if (item.readed) {
             return (
                 <Icon 
                     name="done-all" 
