@@ -4,6 +4,7 @@ import {Icon} from '@rneui/base';
 import {Menu, MenuItem, MenuDivider} from 'react-native-material-menu';
 
 import {Conatiner, AppName, ConatinerAppName, ContainerActions} from './styles';
+import { colors } from '../../themes/whitelabel';
 
 //https://reactnavigation.org/docs/headers/
 export default function Header({state, descriptors, navigation}) {
@@ -19,7 +20,7 @@ export default function Header({state, descriptors, navigation}) {
         <AppName>WhatsApp</AppName>
       </ConatinerAppName>
       <ContainerActions>
-        <Icon name="search" size={30} style={{paddingRight: 10}} />
+        <Icon name="search" color={colors.unselected} size={30} style={{paddingRight: 10}} />
         <Menu
           visible={visible}
           anchor={<Text onPress={showMenu}>menu</Text>}

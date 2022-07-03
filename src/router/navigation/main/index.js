@@ -5,6 +5,7 @@ import {Call, Home, Status} from '../../../containers';
 import {Icon} from '@rneui/base';
 import {colors} from '../../../themes/whitelabel';
 import {Dimensions} from 'react-native';
+import { CALL, CAM, CHAT, HOME, STATUS } from '../../../themes/constants';
 
 const Tab = createMaterialTopTabNavigator();
 const sizeBar = (Dimensions.get('screen').width - 135) / 3;
@@ -12,11 +13,11 @@ const sizeBar = (Dimensions.get('screen').width - 135) / 3;
 export default function TabMain() {
   return (
     <Tab.Navigator
-      initialRouteName="Chats"
+      initialRouteName={HOME}
       screenOptions={{
         tabBarItemStyle: {width: 'auto'},
         tabBarActiveTintColor: colors.white,
-        tabBarInactiveTintColor: '#000',
+        tabBarInactiveTintColor: colors.unselected,
         tabBarPressOpacity: 0,
         tabBarPressColor: 'transparent',
         tabBarIndicatorStyle: {
@@ -30,36 +31,36 @@ export default function TabMain() {
         tabBarLabelStyle: {fontSize: 12},
       }}>
       <Tab.Screen
-        name="Cam"
+        name={CAM}
         component={Call}
         options={{
           tabBarIconStyle: {marginTop: 7},
           title: '',
-          tabBarIcon: () => <Icon name="photo-camera" type="material" />,
+          tabBarIcon: () => <Icon name="photo-camera" color={colors.unselected} type="material" />,
         }}
       />
       <Tab.Screen
-        name="Chats"
+        name={CHAT}
         component={Home}
         options={{
           title: 'Conversas',
-          tabBarLabelStyle: {width: sizeBar},
+          tabBarLabelStyle: {width: sizeBar, fontSize: 12 , fontWeight: 'bold'},
         }}
       />
       <Tab.Screen
-        name="Status"
+        name={STATUS}
         component={Status}
         options={{
           title: 'Status',
-          tabBarLabelStyle: {width: sizeBar},
+          tabBarLabelStyle: {width: sizeBar, fontSize: 12, fontWeight: 'bold'},
         }}
       />
       <Tab.Screen
-        name="Calls"
+        name={CALL}
         component={Call}
         options={{
           title: 'Chamadas',
-          tabBarLabelStyle: {width: sizeBar},
+          tabBarLabelStyle: {width: sizeBar, fontSize: 12, fontWeight: 'bold'},
         }}
       />
     </Tab.Navigator>

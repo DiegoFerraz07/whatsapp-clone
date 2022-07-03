@@ -1,10 +1,15 @@
 import styled from 'styled-components/native';
 
+import {Animated} from 'react-native'
+import { colors } from '../../themes/whitelabel';
+
 export const Container = styled.View`
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 10px;
+    margin-left: 10px;
 `;
 
 export const TextEmpty = styled.Text`
@@ -50,17 +55,16 @@ export const FooterContainer = styled.View`
     justify-content: flex-end;
     align-items: flex-end;
 `;
-export const ButtonSendMessage = styled.TouchableOpacity.attrs({
-        activeOpacity: 1,
-        underlayColor: '#FFF',
-    })`
+export const ButtonSendMessage = styled(Animated.View)`
     display: flex;
     flex-direction: row;
+    height: 50px;
     justify-content: center;
     align-items: center;
-    background-color: #27c04a;
+    background-color: ${colors.primary};
     border-radius: 55px;
     padding: 5px;
+    padding-left: 25px;
     margin-top: 10px;
 `;
 

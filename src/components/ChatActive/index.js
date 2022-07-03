@@ -1,21 +1,10 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-import {
-  BadgeUnread,
-  ContactImage,
-  ContactMessage,
-  ContactName,
-  Container,
-  ContainerImage,
-  ContainerLastMessage,
-  ContainerMessage,
-  ContainerStatus,
-  MessageTime,
-  StatusMessage,
-} from './styles';
-import {Icon} from '@rneui/base';
-import {colors} from '../../themes/whitelabel';
+import { BadgeUnread, ContactImage, ContactMessage, ContactName, Container, ContainerImage, ContainerLastMessage, ContainerMessage, ContainerStatus, MessageTime, StatusMessage } from './styles'
+import { Icon } from '@rneui/base';
+import { colors } from '../../themes/whitelabel';
+import { CHAT } from '../../themes/constants';
 
 export default function ChatActive({item, navigation}) {
   const formatDate = date => {
@@ -49,23 +38,27 @@ export default function ChatActive({item, navigation}) {
   };
 
   return (
-    <Container>
-      <ContainerImage>
-        <ContactImage source={{uri: item.photo}} />
-      </ContainerImage>
-      <ContainerMessage>
-        <ContactName>{item.name}</ContactName>
-        <ContainerLastMessage>
-          <StatusMessage>{renderStatusMessage(item)}</StatusMessage>
-          <ContactMessage>{item.last_message}</ContactMessage>
-        </ContainerLastMessage>
-      </ContainerMessage>
-      <ContainerStatus>
-        <MessageTime>{formatDate(item.date_time_delivered)}</MessageTime>
-        {item.total_unread > 0 && (
-          <BadgeUnread>{item.total_unread}</BadgeUnread>
-        )}
-      </ContainerStatus>
+    <Container
+        onPress={() => navigation.navigate(CHAT, {item})}
+    >
+        <ContainerImage>
+            <ContactImage source={{ uri: item.photo}} />
+        </ContainerImage>
+        <ContainerMessage>
+            <ContactName>{item.name}</ContactName>
+            <ContainerLastMessage>
+                <StatusMessage>
+                    {renderStatusMessage(item)}
+                </StatusMessage>
+                <ContactMessage>{item.last_message}</ContactMessage>
+            </ContainerLastMessage>
+        </ContainerMessage>
+        <ContainerStatus readed= {item.readed}>
+            <MessageTime>{formatDate(item.date_time_delivered)}</MessageTime>
+            {
+                item.total_unread > 0 && <BadgeUnread>{item.total_unread}</BadgeUnread>
+            }
+        </ContainerStatus>
     </Container>
   );
 }

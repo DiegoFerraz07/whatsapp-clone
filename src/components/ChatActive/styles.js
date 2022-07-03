@@ -8,9 +8,9 @@ export const Container = styled.TouchableOpacity.attrs({
     display: flex;
     width: 100%;
     flex-direction: row;
-    padding: 10px
-    border-bottom-width: .5px;
-    border-bottom-color: #e6e6e601f;
+    padding-top: 2px
+    padding-left: 10px
+    padding-right: 10px
     background-color: #fff;
 `;
 
@@ -80,9 +80,10 @@ export const ContainerStatus = styled.View`
 `;
 
 export const MessageTime = styled.Text`
-  font-size: 12px;
-  color: ${colors.primary};
-  margin-right: 5px;
+    font-size: 12px;
+    color: ${(props) =>
+        props.readed ? `${colors.primary}` : `${colors.muted}`};
+    margin-right: 5px;
 `;
 
 export const BadgeUnread = styled.Text`

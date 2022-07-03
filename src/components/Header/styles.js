@@ -17,7 +17,7 @@ export const ConatinerAppName = styled.View`
 export const AppName = styled.Text`
   font-size: 22px;
   font-weigth: bold;
-  color: '#FFF';
+  color: ${colors.unselected};
   padding: 5px;
 `;
 

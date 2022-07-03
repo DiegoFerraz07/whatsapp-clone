@@ -1,21 +1,11 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {EmptyMessages} from '../../components';
-import ChatActive from '../../components/ChatActive';
-
-import {ScrollContainer, ListMessage} from './styles';
-
-const activeChat = require('../../../bin/chats/active.json');
+import {View, Text} from 'react-native';
 
 export default function Chat() {
   return (
-    <ScrollContainer>
-      <ListMessage
-        ListEmptyComponent={() => <EmptyMessages />}
-        data={[]}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => <ChatActive item={item} />}
-      />
-    </ScrollContainer>
+    <View>
+      <Text>Chat</Text>
+    </View>
+      
   );
 }
