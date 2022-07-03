@@ -82,15 +82,15 @@ export const ContainerStatus = styled.View`
 export const MessageTime = styled.Text`
     font-size: 12px;
     color: ${(props) =>
-        props.readed ? `${colors.primary}` : `${colors.muted}`};
+        props.readed ? `${colors.notify}` : `${colors.muted}`};
     margin-right: 5px;
 `;
 
 export const BadgeUnread = styled.Text`
-  background-color: ${colors.primary};
+  background-color: ${colors.notify};
   color: #fff;
   margin-top: 2px;
-  font-size: 10px;
+  font-size: 9px;
   padding: 2px 5px;
   border-radius: 10px;
   margin-left: 5px;

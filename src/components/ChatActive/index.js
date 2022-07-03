@@ -27,7 +27,7 @@ export default function ChatActive({item, navigation}) {
           name="done-all"
           type="material"
           size={20}
-          color={colors.primary}
+          color={colors.notify_readed}
         />
       );
     } else {
