@@ -37,9 +37,20 @@ export default function ChatActive({item, navigation}) {
     }
   };
 
+  const navigateToChat = () => {
+    try {
+      navigation.navigate(CHAT, {
+        chatId: item.id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Container
-        onPress={() => navigation.navigate(CHAT, {item})}
+        onPress={navigateToChat}
+        onLongPress={() => console.log('long press')}
     >
         <ContainerImage>
             <ContactImage source={{ uri: item.photo}} />

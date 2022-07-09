@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from 'styled-components';
 import {colors} from '../../themes/whitelabel';
 
 export const Conatiner = styled.View`
@@ -16,7 +16,6 @@ export const ConatinerAppName = styled.View`
 
 export const AppName = styled.Text`
   font-size: 22px;
-  font-weigth: bold;
   color: ${colors.unselected};
   padding: 5px;
 `;

@@ -5,7 +5,7 @@ import {Call, Home, Status} from '../../../containers';
 import {Icon} from '@rneui/base';
 import {colors} from '../../../themes/whitelabel';
 import {Dimensions} from 'react-native';
-import { CALL, CAM, CHAT, HOME, STATUS } from '../../../themes/constants';
+import { ACTIVE_CHATS, CALL, CAM, CHAT, HOME, STATUS } from '../../../themes/constants';
 
 const Tab = createMaterialTopTabNavigator();
 const sizeBar = (Dimensions.get('screen').width - 135) / 3;
@@ -40,11 +40,11 @@ export default function TabMain() {
         }}
       />
       <Tab.Screen
-        name={CHAT}
+        name={ACTIVE_CHATS}
         component={Home}
         options={{
           title: 'Conversas',
-          tabBarLabelStyle: {width: sizeBar, fontSize: 12 , fontWeight: 'bold'},
+          tabBarLabelStyle: {width: sizeBar, fontSize: 12 },
         }}
       />
       <Tab.Screen
@@ -52,7 +52,7 @@ export default function TabMain() {
         component={Status}
         options={{
           title: 'Status',
-          tabBarLabelStyle: {width: sizeBar, fontSize: 12, fontWeight: 'bold'},
+          tabBarLabelStyle: {width: sizeBar, fontSize: 12},
         }}
       />
       <Tab.Screen
@@ -60,7 +60,7 @@ export default function TabMain() {
         component={Call}
         options={{
           title: 'Chamadas',
-          tabBarLabelStyle: {width: sizeBar, fontSize: 12, fontWeight: 'bold'},
+          tabBarLabelStyle: {width: sizeBar, fontSize: 12},
         }}
       />
     </Tab.Navigator>

@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import {colors} from '../../themes/whitelabel';
 
-export const Container = styled.TouchableOpacity.attrs({
-  activeOpacity: 1,
-  underlayColor: '#FFF',
+export const Container = styled.Pressable.attrs({
+  activeOpacity: .5,
+  delayLongPress: 800,
+  underlayColor: '#CCC',
 })`
     display: flex;
     width: 100%;
