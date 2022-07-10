@@ -1,6 +1,7 @@
 import { Icon } from '@rneui/base';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, Text, Image, ImageBackground, FlatList} from 'react-native';
+import { ChatConversation, HeaderConversation } from '../../components';
 import { api } from '../../services';
 import { ALL_CHAT, USER_FROM } from '../../themes/constants';
 import notifyMessage from '../../themes/utils';
@@ -8,13 +9,13 @@ import { colors } from '../../themes/whitelabel';
 
 export default function Chat({route, navigation}) {
 
-  const [loading, setLoading] = React.useState(false);
-  const [userFrom, setUserFrom] = React.useState(null);
-  const [userFromId, setUserFromId] = React.useState(null);
-  const [chatName, setChatName] = React.useState('');
-  const [chatPhoto, setChatPhoto] = React.useState('');
-  const [conversation, setConversation] = React.useState(null);
-  const [lastViewed, setLastViewed] = React.useState(null);
+  const [loading, setLoading] = useState(false);
+  const [userFrom, setUserFrom] = useState(null);
+  const [userFromId, setUserFromId] = useState(null);
+  const [chatName, setChatName] = useState('');
+  const [chatPhoto, setChatPhoto] = useState('');
+  const [conversation, setConversation] = useState(null);
+  const [lastViewed, setLastViewed] = useState(null);
 
   const { chatId } = route.params;
 
@@ -27,13 +28,13 @@ export default function Chat({route, navigation}) {
         userFromName, 
         userFromLastViewed, 
         userFromPhoto,
-        conversations 
+        conversation
       } = res.data.chatResponse;
 
       setChatName(userFromName);
       setChatPhoto(userFromPhoto);
       setUserFromId(userFromId);
-      setConversation(conversations);
+      setConversation(conversation);
       setLastViewed(userFromLastViewed);
       setLoading(false);
 
@@ -93,17 +94,16 @@ export default function Chat({route, navigation}) {
   });
 
   return (
-    <ImageBackground source={require('../../assets/images/background.jpg')} style={{flex: 1}}>
-    { conversation ? 
+    <ImageBackground source={require('../../assets/images/background.jpg')} style={{flex: 1}}> 
+      
+      {conversation && userFrom && (
       <FlatList
         data={conversation}
+        ListEmptyComponent={() => (<Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>{chatName}</Text>)}
+        ListHeaderComponent={() => <HeaderConversation conversation={conversation} />}
         keyExtractor={(item) => item.id} 
-        renderItem={(item) => (
-            <Text style={{ color: '#000', fontSize: 28}}>
-              {item.message}
-            </Text>
-        )}
-      />: null}
+        renderItem={(item) => <ChatConversation item={item} userFrom={userFrom} />}
+      />)}
     </ImageBackground>
       
   );
