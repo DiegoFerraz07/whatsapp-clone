@@ -33,7 +33,7 @@ export default function Router() {
   };
   
   const options = {
-    gestureEnabled: true,
+    gestureEnabled: false,
     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
     transitionSpec: {
       open: timingConfig,

@@ -21,6 +21,7 @@ api.interceptors.request.use(async (config) => {
 
 api.interceptors.response.use(
   async (response) => {
+    console.log('response: ', response.data);
     const { success, message } = response.data;
     if (!success) {
       var alertMessage = 'Your session has expired. Please login again.';
@@ -29,7 +30,7 @@ api.interceptors.response.use(
       }
       if(!response.config.url.includes('verify-token'))
         notifyMessage(alertMessage);
-      throw new axios.Cancel();
+
     }
     return response;
   },
@@ -39,7 +40,11 @@ api.interceptors.response.use(
     console.log('error: ', error);
     const { status } = error.response;
     if (status === 500 || status === 504) {
-        notifyMessage('Something went wrong. Please try again later.');
+      notifyMessage('Something went wrong. Please try again later.');
+    } else if(status === 401) {
+      notifyMessage('Your session has expired. Please login again.');
+    } else if(status === 0) {
+      notifyMessage('Timeout. Please try again later.');
     }
     return Promise.reject(error);
   },

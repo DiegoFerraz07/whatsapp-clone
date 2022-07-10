@@ -11,12 +11,11 @@ export default function Splash({navigation}) {
     const [progress, setProgress] = useState(0);
     
     const checkStorage = async () => {
+        updateProgress(0.3);
         try {
             const token = await AsyncStorage.getItem("@token");
             if(token) {
-                if(progress < 1)
-                    setProgress(progress + 0.5);
-                verifyToken(token);
+                verifyToken();
             } else {
                 navigation.navigate(REGISTER);
             }
@@ -26,21 +25,25 @@ export default function Splash({navigation}) {
         }
     }
 
-    const verifyToken = async (token) => {
-        await api.post(VERIFY_TOKEN)
+    const verifyToken = async () => {
+        updateProgress(0.3);
+        api.post(VERIFY_TOKEN)
             .then(res => {
                 const { success } = res.data;
                 if(!success) {
                     doLogin();
                 } else {
+                    updateProgress(1);
                     navigation.navigate(MAIN);
                 }
             }).catch(err => {
+                console.log('erro ao verificar token: ', err);
                 doLogin();
             });
     }
 
     const doLogin = async () => {
+        updateProgress(0.3);
         const phone = await AsyncStorage.getItem("@phone");
         const password = await AsyncStorage.getItem("@password");
         await api.post(LOGIN, {
@@ -48,6 +51,7 @@ export default function Splash({navigation}) {
             password
         }).then(async res => {
             const { success, token } = res.data;
+            updateProgress(1);
             if(success) {
                 try {
                     await AsyncStorage.setItem('@token', token);
@@ -59,8 +63,15 @@ export default function Splash({navigation}) {
                 navigation.navigate(REGISTER);
             }
         }).catch(err => {
+            updateProgress(1);
+            console.log('erro ao fazer login: ', err);
             navigation.navigate(REGISTER);
         });
+    }
+
+    const updateProgress = (progress) => {
+        if(progress === 1) setProgress(progress);
+        if(progress < 1) setProgress(progress ++);
     }
 
     useEffect(() => {

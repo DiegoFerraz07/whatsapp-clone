@@ -1,38 +1,73 @@
 import { Icon } from '@rneui/base';
 import React, { useEffect } from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, ImageBackground, FlatList} from 'react-native';
 import { api } from '../../services';
-import { ALL_CHAT } from '../../themes/constants';
+import { ALL_CHAT, USER_FROM } from '../../themes/constants';
+import notifyMessage from '../../themes/utils';
 import { colors } from '../../themes/whitelabel';
 
 export default function Chat({route, navigation}) {
 
+  const [loading, setLoading] = React.useState(false);
+  const [userFrom, setUserFrom] = React.useState(null);
+  const [userFromId, setUserFromId] = React.useState(null);
   const [chatName, setChatName] = React.useState('');
   const [chatPhoto, setChatPhoto] = React.useState('');
+  const [conversation, setConversation] = React.useState(null);
+  const [lastViewed, setLastViewed] = React.useState(null);
 
-  
   const { chatId } = route.params;
 
-
   const getAllChat = async () => {
+    setLoading(true);
     await api.post(ALL_CHAT, {chatId})
     .then(res => {
       const { 
+        userFromId, 
         userFromName, 
         userFromLastViewed, 
-        userFromPhoto 
+        userFromPhoto,
+        conversations 
       } = res.data.chatResponse;
 
       setChatName(userFromName);
       setChatPhoto(userFromPhoto);
-      console.log('CHATS: ', res.data.chatResponse);
+      setUserFromId(userFromId);
+      setConversation(conversations);
+      setLastViewed(userFromLastViewed);
+      setLoading(false);
+
+    })
+    .catch(err => {
+      console.log(err);
+      notifyMessage(err);
+      setLoading(false);
+    });
+  }
+  const getUserFromChat = async () => {
+    await api.post(USER_FROM, {userId: userFromId})
+    .then(res => {
+      const {success, user} = res.data;
+      if(success) {
+        setUserFrom(user);
+      } else {
+        notifyMessage(res.data.message);
+      }
     })
     .catch(err => {
       console.log(err);
     });
   }
 
-  getAllChat();
+  useEffect(() => {
+    if(userFromId) {
+      getUserFromChat();
+    }
+  }, [userFromId])
+
+  useEffect(() => {
+    getAllChat();
+  }, []);
 
   navigation.setOptions({
     headerTitle: '',
@@ -58,9 +93,18 @@ export default function Chat({route, navigation}) {
   });
 
   return (
-    <View>
-      <Text>Chat</Text>
-    </View>
+    <ImageBackground source={require('../../assets/images/background.jpg')} style={{flex: 1}}>
+    { conversation ? 
+      <FlatList
+        data={conversation}
+        keyExtractor={(item) => item.id} 
+        renderItem={(item) => (
+            <Text style={{ color: '#000', fontSize: 28}}>
+              {item.message}
+            </Text>
+        )}
+      />: null}
+    </ImageBackground>
       
   );
 }

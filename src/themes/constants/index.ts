@@ -9,7 +9,7 @@ export const CALL           = 'CALL';
 export const STATUS         = 'STATUS'; 
 export const REGISTER       = 'REGISTER'; 
 
-export const BASE_URL = 'http://192.168.0.107:3000';
+export const BASE_URL = 'http://localhost:3000';
 
 enum ApiVersion {
     v1 = '/api/v1',
@@ -20,3 +20,5 @@ export const VERIFY_TOKEN = `${ApiVersion.v1}/verify-token`;
 export const GENERATE_PIN = `${ApiVersion.v1}/generate-pin`;
 
 export const ALL_CHAT = `${ApiVersion.v1}/all-chat`;
+
+export const USER_FROM = `${ApiVersion.v1}/get-user`;

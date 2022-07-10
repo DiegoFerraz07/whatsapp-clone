@@ -13,7 +13,7 @@ const sizeBar = (Dimensions.get('screen').width - 135) / 3;
 export default function TabMain() {
   return (
     <Tab.Navigator
-      initialRouteName={HOME}
+      initialRouteName={ACTIVE_CHATS}
       screenOptions={{
         tabBarItemStyle: {width: 'auto'},
         tabBarActiveTintColor: colors.white,

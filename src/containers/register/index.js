@@ -47,7 +47,7 @@ export default function Register({ navigation }) {
         if(phone.includes('+')) {
             phone = phone.replace('+', '');
         }
-
+        
         await web.post(GENERATE_PIN, {
             phone
         }).then(res => {
@@ -74,7 +74,7 @@ export default function Register({ navigation }) {
             return;
         }
 
-        
+        clearPin();
         await api.post(LOGIN, {
             phone: phoneNumber,
             password: pinEntered
