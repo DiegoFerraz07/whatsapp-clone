@@ -3,8 +3,8 @@ import React from 'react';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import TabMain from './navigation';
 import { Header } from '../components';
-import { Chat } from '../containers';
-import { CHAT, MAIN } from '../themes/constants';
+import { Chat, Register, Splash } from '../containers';
+import { CHAT, MAIN, REGISTER, SPLASH } from '../themes/constants';
 import { Easing } from 'react-native';
 
 const Stack = createStackNavigator();
@@ -16,6 +16,19 @@ export default function Router() {
     config: {
       duration: 200,
       easing: Easing.linear,
+    },
+  };
+
+  const optionsSplash = {
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+    cardStyle: {
+      backgroundColor: '#fff',
+    },
+    animationTypeForReplace: 'pop',
+    transitionSpec: {
+      open: timingConfig,
+      close: timingConfig,
     },
   };
   
@@ -30,6 +43,7 @@ export default function Router() {
 
   return (
     <Stack.Navigator
+      initialRouteName={SPLASH}
       screenOptions={{
         gestureDirection: 'horizontal',
       }}
@@ -43,6 +57,14 @@ export default function Router() {
         options={options}
         name={CHAT} 
         component={Chat} />
+      <Stack.Screen 
+        options={optionsSplash}
+        name={SPLASH} 
+        component={Splash} />
+      <Stack.Screen 
+        options={optionsSplash}
+        name={REGISTER} 
+        component={Register} />
     </Stack.Navigator>
   );
 }

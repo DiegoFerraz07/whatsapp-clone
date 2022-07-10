@@ -1,5 +1,5 @@
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 import { BASE_URL } from '../themes/constants';
 import notifyMessage from '../themes/utils';
 
@@ -12,9 +12,6 @@ const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
   mainRequest = config;
-  const token = await AsyncStorage.getItem("@token");
-  config.headers.Authorization = token ? `Bearer ${token}` : '';
-
   config.params = { ...config.params};
   return config;
 });
@@ -27,8 +24,7 @@ api.interceptors.response.use(
       if(message) {
         alertMessage = message;
       }
-      if(!response.config.url.includes('verify-token'))
-        notifyMessage(alertMessage);
+      notifyMessage(alertMessage);
       throw new axios.Cancel();
     }
     return response;
@@ -36,7 +32,7 @@ api.interceptors.response.use(
   (error) => {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    console.log('error: ', error);
+    console.log('error: ', error.response);
     const { status } = error.response;
     if (status === 500 || status === 504) {
         notifyMessage('Something went wrong. Please try again later.');
