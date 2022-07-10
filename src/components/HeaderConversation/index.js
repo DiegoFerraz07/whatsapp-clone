@@ -34,7 +34,6 @@ export default function HeaderConversation({conversation}) {
     
     return `${day.length === 1 ? `0${day}` : day}/${ month.length === 1 ? `0${month}` : month}/${year}`;
   }
-  console.log(getDateTimeInitial());
 
   return (
     <View style={{
