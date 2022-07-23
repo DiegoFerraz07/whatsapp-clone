@@ -6,6 +6,7 @@ import {Icon} from '@rneui/base';
 import {colors} from '../../../themes/whitelabel';
 import {Dimensions} from 'react-native';
 import { ACTIVE_CHATS, CALL, CAM, CHAT, HOME, STATUS } from '../../../themes/constants';
+import Cam from '../../../containers/cam';
 
 const Tab = createMaterialTopTabNavigator();
 const sizeBar = (Dimensions.get('screen').width - 135) / 3;
@@ -32,7 +33,7 @@ export default function TabMain() {
       }}>
       <Tab.Screen
         name={CAM}
-        component={Call}
+        component={Cam}
         options={{
           tabBarIconStyle: {marginTop: 7},
           title: '',
