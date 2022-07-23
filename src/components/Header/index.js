@@ -4,7 +4,7 @@ import {Icon} from '@rneui/base';
 import {Menu, MenuItem, MenuDivider} from 'react-native-material-menu';
 
 import {Conatiner, AppName, ConatinerAppName, ContainerActions} from './styles';
-import { colors } from '../../themes/whitelabel';
+import {colors} from '../../themes/whitelabel';
 
 //https://reactnavigation.org/docs/headers/
 export default function Header({state, descriptors, navigation}) {
@@ -20,16 +20,36 @@ export default function Header({state, descriptors, navigation}) {
         <AppName>WhatsApp</AppName>
       </ConatinerAppName>
       <ContainerActions>
-        <Icon name="search" color={colors.unselected} size={30} style={{paddingRight: 10}} />
+        <Icon
+          name="search"
+          color={colors.unselected}
+          size={30}
+          style={{paddingRight: 10}}
+        />
         <Menu
           visible={visible}
-          anchor={<Text onPress={showMenu}>menu</Text>}
+          style={{ 
+            marginLeft:10, 
+            marginTop:-20,
+          }}
+          anchor={
+            <Icon
+              onPress={showMenu}
+              name="more-vert"
+              type="material"
+              color={colors.unselected}
+              size={30}
+              underlayColor={colors.primary}
+              style={{marginRight: 0}}
+            />
+          }
           onRequestClose={hideMenu}>
-          <MenuItem onPress={hideMenu}>Menu item 1</MenuItem>
-          <MenuItem onPress={hideMenu}>Menu item 2</MenuItem>
-          <MenuItem disabled>Disabled item</MenuItem>
-          <MenuDivider />
-          <MenuItem onPress={hideMenu}>Menu item 4</MenuItem>
+          <MenuItem onPress={hideMenu}>Novo Grupo</MenuItem>
+          <MenuItem onPress={hideMenu}>Nova Trasmissão</MenuItem>
+          <MenuItem onPress={hideMenu}>Aparelhos Conectados</MenuItem>
+          <MenuItem onPress={hideMenu}>Mensagens Favoritas</MenuItem>
+          <MenuItem onPress={hideMenu}>Pagamentos</MenuItem>
+          <MenuItem onPress={hideMenu}>Configurações</MenuItem>
         </Menu>
       </ContainerActions>
     </Conatiner>
