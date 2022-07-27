@@ -15,7 +15,8 @@ export default function TabMain() {
   return (
     <Tab.Navigator
       initialRouteName={ACTIVE_CHATS}
-      screenOptions={{
+      screenOptions={({ navigation }) => (
+        {
         tabBarItemStyle: {width: 'auto'},
         tabBarActiveTintColor: colors.white,
         tabBarInactiveTintColor: colors.unselected,
@@ -27,10 +28,10 @@ export default function TabMain() {
         },
         tabBarStyle: {
           backgroundColor: colors.primary,
-          height: 60,
+          height: navigation.getState().index == 0 ? 0 : 60,
         },
         tabBarLabelStyle: {fontSize: 12},
-      }}>
+      })}>
       <Tab.Screen
         name={CAM}
         component={Cam}

@@ -40,23 +40,27 @@ export default function Router() {
       close: timingConfig,
     },
   };
-
   return (
     <Stack.Navigator
       initialRouteName={SPLASH}
       screenOptions={{
         gestureDirection: 'horizontal',
-      }}
-    >
+      }}>
       <Stack.Screen
-       options={{
-        header: (props) => <Header {...props} />,
-        }}
-        name={MAIN}  component={TabMain} />
-      <Stack.Screen 
+        options={({navigation}) => ({
+          header: (props) => {
+            const index = navigation.getState().routes[1]?.state?.index;
+            return ( index != 0 && <Header {...props} />)
+          },
+        })}
+        name={MAIN}
+        component={TabMain} 
+      />
+      <Stack.Screen
         options={options}
         name={CHAT} 
-        component={Chat} />
+        component={Chat} 
+      />
       <Stack.Screen 
         options={optionsSplash}
         name={SPLASH} 
