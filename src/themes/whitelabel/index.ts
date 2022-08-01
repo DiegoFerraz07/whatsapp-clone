@@ -8,4 +8,5 @@ export const colors = {
     unselected: '#E8E8E8',
     notify: '#25d366',
     notify_readed: '#34b7f1',
+    input: '#1f2c34'
 }
