@@ -4,8 +4,9 @@ import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/
 import TabMain from './navigation';
 import { Header } from '../components';
 import { Chat, Register, Splash } from '../containers';
-import { CHAT, MAIN, REGISTER, SPLASH } from '../themes/constants';
+import { CHAT, CONFIG, MAIN, REGISTER, SPLASH } from '../themes/constants';
 import { Easing } from 'react-native';
+import Config from '../containers/menu/config';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ export default function Router() {
       close: timingConfig,
     },
   };
+  
   
   const options = {
     gestureEnabled: false,
@@ -69,6 +71,10 @@ export default function Router() {
         options={optionsSplash}
         name={REGISTER} 
         component={Register} />
+       <Stack.Screen 
+        options={options}
+        name={CONFIG} 
+        component={Config} />
     </Stack.Navigator>
   );
 }

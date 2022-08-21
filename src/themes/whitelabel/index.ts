@@ -1,5 +1,6 @@
 
 export const colors = {
+    background: '#FFF',
     primary: '#075e54',
     primaryChat: '#069988',
     secondary: '#ffc107',
@@ -8,5 +9,5 @@ export const colors = {
     unselected: '#E8E8E8',
     notify: '#25d366',
     notify_readed: '#34b7f1',
-    input: '#1f2c34'
+    input: '#1f2c34',
 }

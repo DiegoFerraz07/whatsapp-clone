@@ -8,6 +8,7 @@ export const ACTIVE_CHATS   = 'ACTIVE_CHATS';
 export const CALL           = 'CALL'; 
 export const STATUS         = 'STATUS'; 
 export const REGISTER       = 'REGISTER'; 
+export const CONFIG         = 'CONFIG'; 
 
 export const BASE_URL = 'http://localhost:3000';
 
